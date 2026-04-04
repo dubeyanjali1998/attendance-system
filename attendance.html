@@ -38,7 +38,13 @@ function onScanSuccess(decodedText) {
 // ✅ Extract ID from QR text
 function extractId(text) {
   let match = text.match(/ID[:\s]*([A-Za-z0-9]+)/i);
-  return match ? match[1] : "NOT FOUND";
+
+  if (match) {
+    return match[1].trim();
+  }
+
+  // fallback: return full text if pattern fails
+  return text.trim();
 }
 
 // ✅ Send data to backend
